@@ -1,0 +1,51 @@
+Il software puo' effettuare diverse azioni (aggiunta effetti, cut di pezzi, etc); ogni 
+azione e' definita come implementazione della classe Command.h; ogni commando e' registrato nel
+CommandRepository, e verranno inoltre registrati i commandi usati in precedenza. Cio' ci consente
+di poter implementare per ogni commando una funzione per effettuare l'Undo, e ci permette di eseguire
+determinati commandi in diverse parti del codice, non necessariamente nella main view. 
+E' da stabilire come ogni commando eseguito, salva i dati relativi alle precedenti esecuzioni: si potrebbero
+salvare i parametri nella stessa classe del commando, ma cio' non consentirebbe gli undo multipli dello stesso
+commando. Ho pensato di aggiungere nella definizione di Command, un istanza di una BList, e per ogni commando
+con parametri definire una struttura coi parametri da salvare.
+
+
+
+Ho creato un UndoStack in cui vengono messi delle copie delle istanze dei commandi;
+quando viene chiamato ExecuteCommand, il commando viene clonato e messo nell'undo
+stack, viene chiamato il metodo Execute del comando clonato; la Execute del comando 
+clonato provvede a memorizzare i parametri con cui e' stato chiamato.
+Quando si preme l'undo, viene tolto dallo stack l'ultimo comando, viene chiamata la undo
+(che utilizza i parametri memorizzati nell'istanza del clone) e viene eliminato il clone.
+
+
+
+
+Per conservare le risorse utilizzate dal progetto corrente, salvataggio, apertura, eliminazione di dati
+e per definire il formato, e' presente una classe ProjectManager, che implementa tutte queste funzionalita'.
+Queste funzionalita' potranno essere utilizzate in tutto il codice, come per il command repository, senza
+dover passare attravverso la chiamata ad un Command.
+
+Per registrare le traccie del progetto, e' presente la classe TrackRepository, che permette di aggiungere
+e modificare le track; il TrackRepository estende la classe BView, e viene aggiunto alla gui per visualizzare
+la lista delle tracks.
+Ogni tipologia di track (stereo, mono, surround, video), sara' implementata come estensione della classe
+Track, ed anch'essa sarà derivata da BView, in modo che ogni tipo di track definisce il modo in cui viene
+renderizzata nella trackview.
+
+TrackRepository, ProjectManager e CommandRepository, utilizzano il singleton pattern per essere accessibili
+in qualunque parte del codice.
+
+
+
+Le classi saranno cosi' suddivise;
+ |----> Root directory: ci saranno solo le classi necessarie allo startup dell'intera applicazione.
+ | |------> Commands: Ogni commando dell'applicazione dovra' essere un implementazione della classe Command,
+ | |				e le implementazioni dei commandi dovranno risiedere in questa cartella.
+ | |------> Gui: Contiene le varie finestre del software. Ogni finestra avra' un file *Window e *View 
+ | |				(perche' Barrett mi ha insegnato a tenerle separate)
+ | |------> Components: Contiene le classi per i vari Repository (Track, Command), le implementazioni
+ | |				dei nuovi widgets utilizzati, dei tipi di track.
+
+
+
+
