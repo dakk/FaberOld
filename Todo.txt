@@ -1,1 +1,4 @@
 * mixer entry values
+* add support for multi channel tracks or study a trick to avoid this problem (like a group track). (In ardour each stereo track
+is a double track with inverted pan)
+* fix shutdown fault

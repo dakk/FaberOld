@@ -29,6 +29,6 @@ const int32 COMMAND_TRACK_ADD				= 0x10;
 const int32	COMMAND_TRACK_MUTE				= 0x11;
 const int32	COMMAND_TRACK_SOLO				= 0x12;
 const int32	COMMAND_TRACK_VOLUME			= 0x13;
-
+const int32 COMMAND_TRACK_PAN				= 0x14;
 
 #endif

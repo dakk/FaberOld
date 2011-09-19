@@ -16,12 +16,24 @@ Track::Track(BRect frame, const char* name, uint32 resizingMode, uint32 flags)
 	fVolume = 50;
 	fMute = false;
 	fSolo = false;
+	fPan = 50;
 }
 
 Track::~Track()
 {
 }
 
+
+void Track::SetPan(int32 pan)
+{
+	fPan = pan;	
+}
+
+
+int32 Track::Pan()
+{
+	return fPan;
+}
 
 bool Track::Mute()
 {

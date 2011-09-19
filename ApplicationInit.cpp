@@ -11,6 +11,7 @@
 #include "CommandTrackMute.h"
 #include "CommandTrackSolo.h"
 #include "CommandTrackVolume.h"
+#include "CommandTrackPan.h"
 #include "CommandMasterVolume.h"
 
 
@@ -27,10 +28,10 @@ ApplicationInit::ApplicationInit()
 ApplicationInit::~ApplicationInit()
 {
 	printf("Destroying singletons...\n");
-	delete CommandRepository::Instance();
-	delete ProjectManager::Instance();
-	delete TrackRepository::Instance();
-	delete Debug::Instance();
+	//delete CommandRepository::Instance();
+	//delete ProjectManager::Instance();
+	//delete TrackRepository::Instance();
+	//delete Debug::Instance();
 	printf("Quit.\n");
 }
 
@@ -53,7 +54,7 @@ void ApplicationInit::SetUpSystem(const char* commandLine)
 	CommandRepository::Instance()->AddCommand(new CommandTrackSolo(), COMMAND_TRACK_SOLO);
 	CommandRepository::Instance()->AddCommand(new CommandTrackVolume(), COMMAND_TRACK_VOLUME);
 	CommandRepository::Instance()->AddCommand(new CommandMasterVolume(), COMMAND_MASTER_VOLUME);
-
+	CommandRepository::Instance()->AddCommand(new CommandTrackPan(), COMMAND_TRACK_PAN);
 
 	printf("Faber is loaded.\n");
 	fMainWindow->Show();

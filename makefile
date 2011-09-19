@@ -6,7 +6,7 @@ Gui/SettingsView.cpp Gui/MixerView.cpp Gui/MixerWindow.cpp
 
 SRCS_COMMANDS = Commands/CommandTrackAdd.cpp Commands/CommandTrackMute.cpp \
 Commands/CommandTrackSolo.cpp Commands/CommandTrackVolume.cpp \
-Commands/CommandMasterVolume.cpp
+Commands/CommandMasterVolume.cpp Commands/CommandTrackPan.cpp
 
 SRCS_COMPONENTS = Components/Command.cpp Components/Track.cpp Components/TrackRepository.cpp \
 Components/ProjectManager.cpp Components/Debug.cpp Components/CommandRepository.cpp \

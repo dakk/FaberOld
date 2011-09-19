@@ -40,11 +40,16 @@ public:
 			bool	Solo();
 			void	SetSolo(bool solo);
 	
+			int32	Pan();
+			void	SetPan(int32 pan);
 private:
 			char	fName[128];
 			int32	fVolume;
 			bool	fMute;
 			bool	fSolo;
+			
+			// Pan is a value between 0 and 100; 50 == centered
+			int32	fPan;
 };
 
 #endif
