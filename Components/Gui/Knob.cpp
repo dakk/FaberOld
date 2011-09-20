@@ -26,10 +26,12 @@ Knob::Knob(		BRect frame,
 				const char* label,
 				BMessage* message, 
 				uint32 resizingMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
-				uint32 flags = B_WILL_DRAW | B_NAVIGABLE);
+				uint32 flags = B_WILL_DRAW | B_NAVIGABLE)
 			:
 			BView(frame, name, resizingMode, flags)
 {
+	SetViewColor(ui_color(B_PANEL_BACKGROUND_COLOR));
+	
 }
 
 Knob::~Knob()
@@ -39,5 +41,20 @@ Knob::~Knob()
 
 void Knob::Draw(BRect updateRect)
 {
-	StrokeEllipse(updateRect, B_SOLID_HIGH);
+	ResizeTo(26,26);
+	
+	StrokeEllipse(BRect(1, 1, 26, 26), B_SOLID_HIGH);
+	
+	SetHighColor(150, 150, 150, 255);
+	FillEllipse(BRect(2, 2, 25, 25), B_SOLID_HIGH);
+
+	SetHighColor(100, 100, 100, 255);
+	FillEllipse(BRect(4, 4, 23, 23), B_SOLID_HIGH);
+	
+	SetPenSize(2.0f);
+
+	SetHighColor(200, 10, 10, 255);	
+	StrokeLine(BPoint(14, 14), BPoint(14, 0), B_SOLID_HIGH);
+	SetHighColor(0, 0, 0, 255);
 }
+
