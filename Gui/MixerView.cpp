@@ -17,6 +17,7 @@
 #include <GroupView.h>
 #include <List.h>
 
+#include "Knob.h"
 #include "TrackRepository.h"
 #include "CommandRepository.h"
 #include "MixerView.h"
@@ -104,6 +105,11 @@ MixerView::MixerView()
 				new BMessage((int32) (MSG_MIXER_SOLO + i)));
 		trackEntry->SoloBox->SetValue(track->Solo());		
 		tmpGroup->GroupLayout()->AddView(trackEntry->SoloBox);
+		
+		trackEntry->PanKnob = new Knob(BRect(0, 0, 30, 30), " ", "Pan", 
+				new BMessage((int32) (MSG_MIXER_PAN + i)));
+		tmpGroup->GroupLayout()->AddView(trackEntry->PanKnob);
+		
 		
 		fEntryList->AddItem(trackEntry);
 		

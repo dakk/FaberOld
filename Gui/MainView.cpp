@@ -20,6 +20,7 @@
 #include "TrackAudioMono.h"
 #include "SettingsWindow.h"
 #include "ImageButton.h"
+#include "Knob.h"
 #include "TimeTrack.h"
 #include "MixerWindow.h"
 
@@ -132,6 +133,8 @@ MainView::MainView()
 	//buttonGroup->GroupLayout()->AddView(new ImageButton(BRect(0,0,24,24), "PlayIcon", "Data/play.png",
 	//													"Data/play_off.png", new BMessage(MSG_PLAY)));
 	BButton *b;
+	
+	
 	/*b = new BButton("<<", new BMessage(MSG_SEEK_START));						
 	buttonGroup->GroupLayout()->AddView(b);
 	b = new BButton(">>", new BMessage(MSG_SEEK_END));						
