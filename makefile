@@ -10,7 +10,7 @@ Commands/CommandMasterVolume.cpp Commands/CommandTrackPan.cpp
 
 SRCS_COMPONENTS = Components/Command.cpp Components/Track.cpp Components/TrackRepository.cpp \
 Components/ProjectManager.cpp Components/Debug.cpp Components/CommandRepository.cpp \
-Components/Gui/ImageButton.cpp Components/TrackAudioMono.cpp \
+Components/Gui/ImageButton.cpp Components/Gui/Knob.cpp Components/TrackAudioMono.cpp \
 Components/TimeTrack.cpp 
 
 SRCS = Faber.cpp ApplicationInit.cpp  $(SRCS_GUI) $(SRCS_COMMANDS) $(SRCS_COMPONENTS)
