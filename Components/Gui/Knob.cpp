@@ -91,3 +91,18 @@ void Knob::Draw(BRect updateRect)
 	fValue = (fValue + 1) % fMaxValue;
 }
 
+
+
+void Knob::MouseMoved(BPoint point, uint32 transit, const BMessage* message)
+{
+		
+}
+
+
+void Knob::MouseDown(BPoint where)
+{
+	
+	
+}
+
+
