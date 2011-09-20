@@ -16,6 +16,7 @@
 #include <GraphicsDefs.h>
 #include <Resources.h>
 #include <GroupLayout.h>
+#include <math.h>
 
 #include "Globals.h"
 
@@ -25,6 +26,8 @@ Knob::Knob(		BRect frame,
 				const char* name, 
 				const char* label,
 				BMessage* message, 
+				uint32 minValue,
+				uint32 maxValue,
 				uint32 resizingMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
 				uint32 flags = B_WILL_DRAW | B_NAVIGABLE)
 			:
@@ -32,6 +35,9 @@ Knob::Knob(		BRect frame,
 {
 	SetViewColor(ui_color(B_PANEL_BACKGROUND_COLOR));
 	
+	fMinValue = minValue;
+	fMaxValue = maxValue;
+	fValue = 0;
 }
 
 Knob::~Knob()
@@ -41,20 +47,47 @@ Knob::~Knob()
 
 void Knob::Draw(BRect updateRect)
 {
-	ResizeTo(26,26);
+	int d = 26;
+	ResizeTo(d+2,d+2);
 	
-	StrokeEllipse(BRect(1, 1, 26, 26), B_SOLID_HIGH);
+	// Ellipses
+	StrokeEllipse(BRect(1, 1, 1+d, 1+d), B_SOLID_HIGH);
 	
 	SetHighColor(150, 150, 150, 255);
-	FillEllipse(BRect(2, 2, 25, 25), B_SOLID_HIGH);
+	FillEllipse(BRect(1, 1, d+1, d+1), B_SOLID_HIGH);
 
 	SetHighColor(100, 100, 100, 255);
-	FillEllipse(BRect(4, 4, 23, 23), B_SOLID_HIGH);
+	FillEllipse(BRect(4, 4, d - 2, d - 2), B_SOLID_HIGH);
 	
+	// Limits
+	StrokeLine(BPoint(d/2 + 1, d/2 + 1), BPoint(d/2 - d/4 - 1, d/2 + d/4 + 1), B_SOLID_HIGH);
+	StrokeLine(BPoint(d/2 + 1, d/2 + 1), BPoint(d/2 + d/4 + 1, d/2 + d/4 + 1), B_SOLID_HIGH);
+
+	// Value indicator
+	BPoint start;
+	BPoint end;
+	double rad;
+	uint32 diff = fMaxValue - fMinValue;
+	
+	// Transform from fValue to radiant
+	rad = (5/3 * 3.14) - fValue * (7/3 * 3.14) / diff; //5/3 * 3.14 - (fValue - fMinValue) * 5 / 3 * 3.14 / diff;
+
+/*	
+	4/3 * 3.14 = fMinValue;
+	10/3 * 3.14 = fMaxValue;
+	
+	10 / 3 - 4 / 3 * 3.14 = 7 / * 3.14
+*/	
+	
+	// Determinate indicator position
+	start = BPoint(d/2 + 1, d/2 + 1);
+	end = BPoint((d/2 + 1) + d/2 * cos(rad), (d/2 + 1) + d/2 * sin(rad));
 	SetPenSize(2.0f);
 
 	SetHighColor(200, 10, 10, 255);	
-	StrokeLine(BPoint(14, 14), BPoint(14, 0), B_SOLID_HIGH);
+	StrokeLine(start, end, B_SOLID_HIGH);
 	SetHighColor(0, 0, 0, 255);
+	
+	fValue = (fValue + 1) % fMaxValue;
 }
 

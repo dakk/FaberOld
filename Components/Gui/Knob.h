@@ -17,11 +17,18 @@ public:
 							const char* name,
 							const char* label,
 							BMessage* message, 
+							uint32 minValue = 0,
+							uint32 maxValue = 100,
 							uint32 resizingMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
 							uint32 flags = B_WILL_DRAW | B_NAVIGABLE);
 						
                     ~Knob();
 	virtual	void 	Draw(BRect updateRect);
+	
+protected:
+			uint32	fMinValue;
+			uint32	fMaxValue;
+			uint32	fValue;
 };
 
 #endif
