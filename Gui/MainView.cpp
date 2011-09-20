@@ -443,7 +443,7 @@ void MainView::MessageReceived(BMessage *message)
 
         case MSG_SETTINGS:
         {
-        	SettingsWindow *settingsWindow = new SettingsWindow(BRect(150, 150, 340, 325));
+        	SettingsWindow *settingsWindow = new SettingsWindow(BRect(150, 150, 540, 325));
         	settingsWindow->Show();
             break;
         }

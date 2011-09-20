@@ -19,6 +19,7 @@
 #include <Slider.h>
 #include <TextControl.h>
 #include <Window.h>
+#include <TabView.h>
 #include <View.h>
 #include <Box.h>
 #include <Catalog.h>
@@ -47,17 +48,48 @@ SettingsView::SettingsView()
 	BGroupLayout* rootLayout = new BGroupLayout(B_VERTICAL);
 	SetLayout(rootLayout);
 
-	// Audiofile entry
-	BGroupView* audioGroup = new BGroupView(B_HORIZONTAL);
-	BBox* audioBox = new BBox("audiobox");
-	audioBox->SetLabel("Audio files");
-
-	BGroupLayout* audioLayout = new BGroupLayout(B_VERTICAL);
-	audioLayout->SetInsets(10, audioBox->TopBorderOffset() * 2 + 10, 10, 10);
-	audioBox->SetLayout(audioLayout);
+	BRect r;
+	BTabView *tabView;
+	BTab *tab;
 	
-	audioGroup->GroupLayout()->AddView(audioBox);
-	rootLayout->AddView(audioGroup);
+	tabView = new BTabView(r, " ");
+	tabView->SetViewColor(216,216,216,0);
+
+	r = tabView->Bounds();
+	r.InsetBy(5,5);
+	r.bottom -= tabView->TabHeight();
+	rootLayout->AddView(tabView);
+
+
+	// Interface
+	BView *interfaceView = new BView(" ", B_WILL_DRAW,  0);
+	
+	tab = new BTab();
+	tabView->AddTab(interfaceView, tab);
+	tab->SetLabel("Interface");
+
+
+	// Interface
+	BView *hotkeyView = new BView(" ", B_WILL_DRAW,  0);
+	
+	tab = new BTab();
+	tabView->AddTab(hotkeyView, tab);
+	tab->SetLabel("Hotkeys");
+
+
+
+	// Audio I/O
+	BView *audioView = new BView(" ", B_WILL_DRAW,  0);
+	
+	//engineCombo = new BComboBox(BRect(0,0, 200, 30), " ", "Engine", new BMessage(MSG_SETTINGS_DEFAULTS));
+	//audioView->AddView(engineCombo);
+	
+	
+	tab = new BTab();
+	tabView->AddTab(audioView, tab);
+	tab->SetLabel("Audio Input/Output");
+	
+
 	
 	// Defaults and revert buttons
 	BGroupView* buttonGroup = new BGroupView(B_HORIZONTAL);

@@ -25,7 +25,8 @@ public:
                     ~Knob();
 	virtual	void 	Draw(BRect updateRect);
 	virtual void	MouseDown(BPoint where);
-	virtual void	MouseMoved(BPoint point, uint32 transit, const BMessage* message);
+	//virtual void	MouseMoved(BPoint point, uint32 transit, const BMessage* message);
+
 	
 protected:
 			uint32	fMinValue;

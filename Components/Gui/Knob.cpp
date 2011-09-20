@@ -93,11 +93,12 @@ void Knob::Draw(BRect updateRect)
 
 
 
+/*
 void Knob::MouseMoved(BPoint point, uint32 transit, const BMessage* message)
 {
 		
 }
-
+*/
 
 void Knob::MouseDown(BPoint where)
 {
