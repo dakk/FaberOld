@@ -26,6 +26,9 @@ public:
 	virtual	void 	Draw(BRect updateRect);
 	virtual void	MouseDown(BPoint where);
 	//virtual void	MouseMoved(BPoint point, uint32 transit, const BMessage* message);
+	
+			uint32	Value();
+			void	SetValue(uint32 value);
 
 	
 protected:

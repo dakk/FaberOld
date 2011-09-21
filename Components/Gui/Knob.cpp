@@ -107,3 +107,21 @@ void Knob::MouseDown(BPoint where)
 }
 
 
+
+uint32 Knob::Value()
+{
+	return fValue;
+}
+
+
+void Knob::SetValue(uint32 value)
+{
+	fValue = value;
+	
+	if(fValue < fMinValue)
+		fValue = fMinValue;
+	else if(fValue > fMaxValue)
+		fValue = fMaxValue;
+}
+
+

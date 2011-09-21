@@ -1,0 +1,83 @@
+10
+
+dir
+42271
+svn://svn.berlios.de/haiku/haiku/trunk/src/apps/cortex/addons
+svn://svn.berlios.de/haiku
+
+
+
+2010-07-21T21:43:20.306146Z
+37670
+zooey
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+a95241bf-73f2-0310-859d-f6bbb57e9c96
+
+NullFilter
+dir
+
+AudioAdapter
+dir
+
+LoggingConsumer
+dir
+
+audioOps
+dir
+
+Jamfile
+file
+
+
+
+
+2011-05-19T18:32:46.000000Z
+932bd3c8e00d976ab451565e459bb4ca
+2008-03-29T19:11:58.667353Z
+24664
+mauricek
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+264
+
+common
+dir
+
+ToneProducer
+dir
+
+Flanger
+dir
+
