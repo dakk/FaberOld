@@ -25,6 +25,8 @@ TimeTrack::~TimeTrack()
 
 void TimeTrack::Draw(BRect updateRect)
 {
+	ResizeTo(updateRect.Width(), 27);
+	
 	int32 cur_x;
 	char num[32];
 	int32 size_y = (int32) (updateRect.bottom - 10);

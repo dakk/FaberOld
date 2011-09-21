@@ -15,9 +15,9 @@
 
 
 
-SettingsWindow::SettingsWindow(BRect frame) 
+SettingsWindow::SettingsWindow() 
 		:
-		BWindow(frame, "Faber Settings", B_TITLED_WINDOW,
+		BWindow(BRect(150, 150, 540, 320), "Faber Settings", B_TITLED_WINDOW,
 					B_NOT_ZOOMABLE)
 {	
 	SetLayout(new BGroupLayout(B_VERTICAL));

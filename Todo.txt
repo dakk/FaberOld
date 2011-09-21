@@ -1,4 +1,9 @@
-* mixer entry values
+* mixer entry values (extends a bslider to show an entry auto updated with slider changing)
 * add support for multi channel tracks or study a trick to avoid this problem (like a group track). (In ardour each stereo track
 is a double track with inverted pan)
+
+
+
+DONE:
 * fix shutdown fault
+* pan support for each track

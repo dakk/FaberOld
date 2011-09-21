@@ -79,6 +79,8 @@ MainView::MainView()
 	fViewMenu->AddItem(new BSeparatorItem);	
 	fViewMenu->AddItem(new BMenuItem("Zoom In", new BMessage(MSG_ZOOM_IN), '+'));
 	fViewMenu->AddItem(new BMenuItem("Zoom Out", new BMessage(MSG_ZOOM_OUT), '-'));
+	fViewMenu->AddItem(new BSeparatorItem);	
+	fViewMenu->AddItem(new BMenuItem("Fullscreen", new BMessage(MSG_FULLSCREEN), 'F'));
 	fMenuBar->AddItem(fViewMenu);
 
 	fSeekMenu = new BMenu("Seek");
@@ -443,13 +445,27 @@ void MainView::MessageReceived(BMessage *message)
 
         case MSG_SETTINGS:
         {
-        	SettingsWindow *settingsWindow = new SettingsWindow(BRect(150, 150, 540, 320));
+        	SettingsWindow *settingsWindow = new SettingsWindow();
         	settingsWindow->Show();
             break;
         }
 
 
 		/* View commands */
+		case MSG_FULLSCREEN:
+		{
+			if(Window()->Look() != B_BORDERED_WINDOW_LOOK)
+			{
+				Window()->SetLook(B_BORDERED_WINDOW_LOOK);
+			}
+			else
+			{
+				Window()->SetLook(B_TITLED_WINDOW_LOOK);
+			}
+			
+			break;	
+		}
+		
 		case MSG_MIXER:
 		{
 			MixerWindow *mixerWindow = new MixerWindow();

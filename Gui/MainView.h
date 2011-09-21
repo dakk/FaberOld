@@ -50,6 +50,7 @@ const int32 MSG_MANUAL              =  0x22;
 const int32 MSG_MIXER				=  0x61;
 const int32 MSG_ZOOM_IN				=  0x62;
 const int32 MSG_ZOOM_OUT			=  0x63;
+const int32 MSG_FULLSCREEN			=  0x64;
 
 /* Tracks commands */
 const int32 MSG_ADD_MIDI            =  0x32;

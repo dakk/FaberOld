@@ -87,7 +87,7 @@ SettingsView::SettingsView()
 	
 	tab = new BTab();
 	tabView->AddTab(audioView, tab);
-	tab->SetLabel("Audio Input/Output");
+	tab->SetLabel("Audio IO");
 	
 
 	

@@ -58,4 +58,9 @@ void ApplicationInit::SetUpSystem(const char* commandLine)
 
 	printf("Faber is loaded.\n");
 	fMainWindow->Show();
+
+	CommandRepository::Instance()->ExecuteCommand(COMMAND_TRACK_ADD, (void *) ETT_AUDIO_MONO);
+	CommandRepository::Instance()->ExecuteCommand(COMMAND_TRACK_ADD, (void *) ETT_AUDIO_MONO);	
+	CommandRepository::Instance()->ExecuteCommand(COMMAND_TRACK_ADD, (void *) ETT_AUDIO_MONO);
+	CommandRepository::Instance()->ExecuteCommand(COMMAND_TRACK_ADD, (void *) ETT_AUDIO_MONO);
 }

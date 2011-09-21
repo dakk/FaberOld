@@ -22,7 +22,7 @@
 class SettingsWindow : public BWindow 
 {
 public:
-							SettingsWindow(BRect frame);
+							SettingsWindow();
 	virtual	void			MessageReceived(BMessage* mesage);
 	virtual	bool    		QuitRequested();
 
