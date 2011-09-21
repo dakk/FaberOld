@@ -27,10 +27,10 @@ const int32 MSG_MIXER_MASTER	=  0x00000000;
 
 typedef struct
 {
-	BSlider*	Slider;
+	BSlider*	VolumeSlider;
 	BCheckBox*	MuteBox;
 	BCheckBox*	SoloBox;
-	Knob*		PanKnob;
+	BSlider*	PanKnob; // Will be a knob object
 	
 	int32		TrackId;
 } MixerTrackEntry;

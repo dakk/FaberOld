@@ -48,7 +48,7 @@ private:
 			bool	fMute;
 			bool	fSolo;
 			
-			// Pan is a value between 0 and 100; 50 == centered
+			// Pan is a value between -10 and 10 where 0 is centered
 			int32	fPan;
 };
 

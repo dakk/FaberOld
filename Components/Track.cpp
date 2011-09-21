@@ -16,7 +16,7 @@ Track::Track(BRect frame, const char* name, uint32 resizingMode, uint32 flags)
 	fVolume = 50;
 	fMute = false;
 	fSolo = false;
-	fPan = 50;
+	fPan = 0;
 }
 
 Track::~Track()

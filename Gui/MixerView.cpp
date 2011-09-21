@@ -75,45 +75,67 @@ MixerView::MixerView()
 		
 		trackEntry->TrackId = i;
 		
-		BGroupView* tmpGroup = new BGroupView(B_VERTICAL);
+		BGroupView* audioGroup = new BGroupView(B_HORIZONTAL);
+		BBox* audioBox = new BBox("audiobox");
+		audioBox->SetLabel("Audio files");
+
+		BGroupLayout* audioLayout = new BGroupLayout(B_VERTICAL);
+		audioLayout->SetInsets(10, audioBox->TopBorderOffset() * 2 + 10, 10, 10);
+		audioBox->SetLayout(audioLayout);
+
+		audioGroup->GroupLayout()->AddView(audioBox);
+		rootLayout->AddView(audioGroup);
+	
 		
 		Track *track = (Track *) trackList->ItemAt(i);
 		char label[32];
 		
 		sprintf(label, "%s (%d)", track->Name(), (i + 1));
 		
-		trackEntry->Slider = new BSlider(BRect(0, 0, 20, 100), " ", label,
+		audioBox->SetLabel(label);
+		
+		trackEntry->VolumeSlider = new BSlider(BRect(0, 0, 20, 100), " ", "Volume",
 				new BMessage((int32) (MSG_MIXER_VOLUME + i)), 0, 100, B_VERTICAL);
 		
-		trackEntry->Slider->SetBarColor(barColor);
-		trackEntry->Slider->UseFillColor(true, &fillColor);
-		trackEntry->Slider->SetHashMarks(B_HASH_MARKS_BOTTOM);
-		trackEntry->Slider->SetHashMarkCount(10);
-		trackEntry->Slider->SetValue(track->Volume());
+		trackEntry->VolumeSlider->SetBarColor(barColor);
+		trackEntry->VolumeSlider->UseFillColor(true, &fillColor);
+		trackEntry->VolumeSlider->SetHashMarks(B_HASH_MARKS_BOTTOM);
+		trackEntry->VolumeSlider->SetHashMarkCount(10);
+		trackEntry->VolumeSlider->SetValue(track->Volume());
 		
-		tmpGroup->GroupLayout()->AddView(trackEntry->Slider);
+		audioLayout->AddView(trackEntry->VolumeSlider);
 		
+		
+		//trackEntry->PanKnob = new Knob(BRect(0, 0, 30, 30), " ", "Pan", 
+		//		new BMessage((int32) (MSG_MIXER_PAN + i)));
+		trackEntry->PanKnob = new BSlider(BRect(0, 0, 20, 100), " ", "Pan",
+				new BMessage((int32) (MSG_MIXER_PAN + i)), -10, 10, B_HORIZONTAL);
+		
+		trackEntry->PanKnob->SetBarColor(barColor);
+		trackEntry->PanKnob->UseFillColor(true, &fillColor);
+		trackEntry->PanKnob->SetHashMarks(B_HASH_MARKS_BOTTOM);
+		trackEntry->PanKnob->SetHashMarkCount(10);
+		trackEntry->PanKnob->SetValue(track->Pan());
+				
+		audioLayout->AddView(trackEntry->PanKnob);
+
+
+
 		
 		trackEntry->MuteBox = new BCheckBox(BRect(), " ", "Mute",
 				new BMessage((int32) (MSG_MIXER_MUTE + i)));
 		trackEntry->MuteBox->SetValue(track->Mute());		
-		tmpGroup->GroupLayout()->AddView(trackEntry->MuteBox);
+		audioLayout->AddView(trackEntry->MuteBox);
 		
 		
 		
 		trackEntry->SoloBox = new BCheckBox(BRect(), " ", "Solo",
 				new BMessage((int32) (MSG_MIXER_SOLO + i)));
 		trackEntry->SoloBox->SetValue(track->Solo());		
-		tmpGroup->GroupLayout()->AddView(trackEntry->SoloBox);
+		audioLayout->AddView(trackEntry->SoloBox);
+				
 		
-		trackEntry->PanKnob = new Knob(BRect(0, 0, 30, 30), " ", "Pan", 
-				new BMessage((int32) (MSG_MIXER_PAN + i)));
-		tmpGroup->GroupLayout()->AddView(trackEntry->PanKnob);
-		
-		
-		fEntryList->AddItem(trackEntry);
-		
-		rootLayout->AddView(tmpGroup);		
+		fEntryList->AddItem(trackEntry);		
 	}
 }
 
@@ -130,9 +152,10 @@ void MixerView::AttachedToWindow()
 		
 		if(trackEntry != NULL)
 		{
-			trackEntry->Slider->SetTarget(this);
+			trackEntry->VolumeSlider->SetTarget(this);
 			trackEntry->SoloBox->SetTarget(this);
-			trackEntry->MuteBox->SetTarget(this);	
+			trackEntry->MuteBox->SetTarget(this);
+			trackEntry->PanKnob->SetTarget(this);	
 		}
 	}
 	
@@ -202,7 +225,7 @@ void MixerView::MessageReceived(BMessage *message)
 					
 		for(i = 0; i < tracks; i++)
 		{
-			if((((MixerTrackEntry*) (fEntryList->ItemAt(i)))->Slider->Message()->what) == message->what)
+			if((((MixerTrackEntry*) (fEntryList->ItemAt(i)))->VolumeSlider->Message()->what) == message->what)
 			{
 				trackEntry = ((MixerTrackEntry*) (fEntryList->ItemAt(i)));
 				break;
@@ -211,9 +234,31 @@ void MixerView::MessageReceived(BMessage *message)
 		
 		if(trackEntry != NULL)
 		{
-			int32 vol = trackEntry->Slider->Value();
+			int32 vol = trackEntry->VolumeSlider->Value();
 	
 			CommandRepository::Instance()->ExecuteCommand(COMMAND_TRACK_VOLUME, (void*) trackEntry->TrackId, (void*) (vol), NULL);
+			//printf("Volume: %d %d\n", vol, trackEntry->TrackId);
+		}
+	}
+	else if((message->what >= MSG_MIXER_PAN) && (message->what <= (MSG_MIXER_PAN + tracks)))
+	{
+		MixerTrackEntry *trackEntry = NULL;
+		int32 trackId = message->what - MSG_MIXER_PAN + 1;	
+					
+		for(i = 0; i < tracks; i++)
+		{
+			if((((MixerTrackEntry*) (fEntryList->ItemAt(i)))->PanKnob->Message()->what) == message->what)
+			{
+				trackEntry = ((MixerTrackEntry*) (fEntryList->ItemAt(i)));
+				break;
+			}
+		}
+		
+		if(trackEntry != NULL)
+		{
+			int32 pan = trackEntry->PanKnob->Value();
+	
+			CommandRepository::Instance()->ExecuteCommand(COMMAND_TRACK_PAN, (void*) trackEntry->TrackId, (void*) (pan), NULL);
 			//printf("Volume: %d %d\n", vol, trackEntry->TrackId);
 		}
 	}

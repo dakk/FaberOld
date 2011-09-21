@@ -443,7 +443,7 @@ void MainView::MessageReceived(BMessage *message)
 
         case MSG_SETTINGS:
         {
-        	SettingsWindow *settingsWindow = new SettingsWindow(BRect(150, 150, 540, 325));
+        	SettingsWindow *settingsWindow = new SettingsWindow(BRect(150, 150, 540, 320));
         	settingsWindow->Show();
             break;
         }
@@ -452,7 +452,7 @@ void MainView::MessageReceived(BMessage *message)
 		/* View commands */
 		case MSG_MIXER:
 		{
-			MixerWindow *mixerWindow = new MixerWindow(BRect(150, 150, 540, 325));
+			MixerWindow *mixerWindow = new MixerWindow();
 			mixerWindow->Show();
 			break;	
 		}

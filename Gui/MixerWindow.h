@@ -18,7 +18,7 @@
 class MixerWindow : public BWindow 
 {
 public:
-							MixerWindow(BRect frame);
+							MixerWindow();
 	virtual	void			MessageReceived(BMessage* mesage);
 	virtual	bool    		QuitRequested();
 

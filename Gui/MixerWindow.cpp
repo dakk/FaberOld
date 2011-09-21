@@ -14,9 +14,9 @@
 
 
 
-MixerWindow::MixerWindow(BRect frame) 
+MixerWindow::MixerWindow() 
 		:
-		BWindow(frame, "Mixer", B_TITLED_WINDOW, B_NOT_ZOOMABLE)
+		BWindow(BRect(150, 100, 540, 480), "Mixer", B_TITLED_WINDOW, B_NOT_ZOOMABLE)
 {	
 	SetLayout(new BGroupLayout(B_VERTICAL));
 
