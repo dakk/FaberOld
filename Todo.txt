@@ -1,3 +1,4 @@
+* move from Command design to BMessage design
 * mixer entry values (extends a bslider to show an entry auto updated with slider changing)
 * add support for multi channel tracks or study a trick to avoid this problem (like a group track). (In ardour each stereo track
 is a double track with inverted pan)
