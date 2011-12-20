@@ -54,3 +54,43 @@ CommandRepository* CommandRepository::Instance()
 	fInstance = new CommandRepository();
 	return fInstance;
 }
+
+
+
+void CommandRepository::SetMasterVolume(int32 vol)
+{
+	
+	
+}
+
+
+void CommandRepository::AddTrack(TrackType type)
+{
+	
+}
+
+
+void CommandRepository::SetTrackMute(int32 track, bool state)
+{
+	
+}
+
+
+void CommandRepository::SetTrackPan(int32 track, int32 pan)
+{
+	
+}
+
+
+void CommandRepository::SetTrackSolo(int32 track, bool state)
+{
+	
+}
+
+
+void CommandRepository::SetTrackVolume(int32 track, int32 vol)
+{
+	
+}
+
+

@@ -9,6 +9,7 @@
 #define __COMMAND_REPOSITORY_H
 
 #include <List.h>
+#include "Track.h"
 #include "Globals.h"
 
 class CommandRepository
@@ -20,6 +21,16 @@ public:
 			BList*				UndoStack();
 			void				Undo();
 			void				Redo();
+
+
+	// Commands
+			void				SetMasterVolume(int32 vol);
+			
+			void				AddTrack(TrackType type);
+			void				SetTrackMute(int32 track, bool state);
+			void				SetTrackPan(int32 track, int32 pan);
+			void				SetTrackSolo(int32 track, bool state);
+			void				SetTrackVolume(int32 track, int32 vol);
 
 protected:
 								CommandRepository();

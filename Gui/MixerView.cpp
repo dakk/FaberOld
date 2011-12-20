@@ -172,7 +172,7 @@ void MixerView::MessageReceived(BMessage *message)
 	
 	if(message->what == MSG_MIXER_MASTER)
 	{
-		//CommandRepository::Instance()->ExecuteCommand(COMMAND_MASTER_VOLUME, (void*) fMasterVolume->Value(), NULL, NULL);
+		CommandRepository::Instance()->SetMasterVolume((int32) fMasterVolume->Value());
 	}
 	else if((message->what >= MSG_MIXER_SOLO) && (message->what <= (MSG_MIXER_SOLO + tracks)))
 	{
@@ -192,7 +192,7 @@ void MixerView::MessageReceived(BMessage *message)
 		{
 			bool state = (bool) trackEntry->SoloBox->Value();
 	
-			//CommandRepository::Instance()->ExecuteCommand(COMMAND_TRACK_SOLO, (void*) trackEntry->TrackId, (void*) (state), NULL);
+			CommandRepository::Instance()->SetTrackSolo(trackEntry->TrackId, state);
 			//printf("Solo: %d %d\n", state, trackEntry->TrackId);
 		}
 	}
@@ -214,7 +214,7 @@ void MixerView::MessageReceived(BMessage *message)
 		{
 			bool state = (bool) trackEntry->MuteBox->Value();
 	
-			//CommandRepository::Instance()->ExecuteCommand(COMMAND_TRACK_MUTE, (void*) trackEntry->TrackId, (void*) (state), NULL);
+			CommandRepository::Instance()->SetTrackMute(trackEntry->TrackId, state);
 			//printf("Mute: %d %d\n", state, trackEntry->TrackId);
 		}
 	}
@@ -236,7 +236,7 @@ void MixerView::MessageReceived(BMessage *message)
 		{
 			int32 vol = trackEntry->VolumeSlider->Value();
 	
-			//CommandRepository::Instance()->ExecuteCommand(COMMAND_TRACK_VOLUME, (void*) trackEntry->TrackId, (void*) (vol), NULL);
+			CommandRepository::Instance()->SetTrackVolume(trackEntry->TrackId, (int32) vol);
 			//printf("Volume: %d %d\n", vol, trackEntry->TrackId);
 		}
 	}
@@ -258,7 +258,7 @@ void MixerView::MessageReceived(BMessage *message)
 		{
 			int32 pan = trackEntry->PanKnob->Value();
 	
-			//CommandRepository::Instance()->ExecuteCommand(COMMAND_TRACK_PAN, (void*) trackEntry->TrackId, (void*) (pan), NULL);
+			CommandRepository::Instance()->SetTrackPan(trackEntry->TrackId, pan);
 			//printf("Volume: %d %d\n", vol, trackEntry->TrackId);
 		}
 	}

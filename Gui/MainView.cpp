@@ -502,7 +502,7 @@ void MainView::MessageReceived(BMessage *message)
         #ifdef MIDI
         case MSG_ADD_MIDI:
 		{
-			//CommandRepository::Instance()->ExecuteCommand(COMMAND_TRACK_ADD, (void *) ETT_MIDI);
+			CommandRepository::Instance()->AddTrack(ETT_MIDI);
             UpdateUndoRedo();
             break;
         }
@@ -511,7 +511,7 @@ void MainView::MessageReceived(BMessage *message)
         #ifdef SUBTITLE
         case MSG_ADD_SUBTITLE:
 		{
-			//CommandRepository::Instance()->ExecuteCommand(COMMAND_TRACK_ADD, (void *) ETT_SUBTITLE);
+			CommandRepository::Instance()->AddTrack(ETT_SUBTITLE);
             UpdateUndoRedo();
             break;
         }
@@ -520,7 +520,7 @@ void MainView::MessageReceived(BMessage *message)
         #ifdef VIDEO
         case MSG_ADD_VIDEO:
 		{
-			//CommandRepository::Instance()->ExecuteCommand(COMMAND_TRACK_ADD, (void *) ETT_VIDEO);
+			CommandRepository::Instance()->AddTrack(ETT_VIDEO);
             UpdateUndoRedo();
             break;
         }
@@ -529,14 +529,14 @@ void MainView::MessageReceived(BMessage *message)
         #ifdef AUDIO
         case MSG_ADD_AUDIO_MONO:
 		{
-			//CommandRepository::Instance()->ExecuteCommand(COMMAND_TRACK_ADD, (void *) ETT_AUDIO_MONO);
+			CommandRepository::Instance()->AddTrack(ETT_AUDIO_MONO);
             UpdateUndoRedo();
             break;
         }
 
         case MSG_ADD_AUDIO_STEREO:
 		{
-			//CommandRepository::Instance()->ExecuteCommand(COMMAND_TRACK_ADD, (void *) ETT_AUDIO_STEREO);
+			CommandRepository::Instance()->AddTrack(ETT_AUDIO_STEREO);
             UpdateUndoRedo();
             break;
         }
@@ -544,7 +544,7 @@ void MainView::MessageReceived(BMessage *message)
 		#ifdef AUDIO_SURROUND
         case MSG_ADD_AUDIO_SURROUND:
 		{
-			//CommandRepository::Instance()->ExecuteCommand(COMMAND_TRACK_ADD, (void *) ETT_AUDIO_SURROUND);
+			CommandRepository::Instance()->AddTrack(ETT_AUDIO_SURROUND);
             UpdateUndoRedo();
             break;
         }
