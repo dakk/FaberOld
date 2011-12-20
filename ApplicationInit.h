@@ -21,7 +21,7 @@ class ApplicationInit
 public:
 					ApplicationInit();
 					~ApplicationInit();
-	void			SetUpSystem(const char* commandLine);
+	void			SetUpSystem(int argc, char **argv);
 
 private:
 	MainWindow*		fMainWindow;

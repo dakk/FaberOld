@@ -27,10 +27,10 @@ public:
 			void				SetMasterVolume(int32 vol);
 			
 			void				AddTrack(TrackType type);
-			void				SetTrackMute(int32 track, bool state);
-			void				SetTrackPan(int32 track, int32 pan);
-			void				SetTrackSolo(int32 track, bool state);
-			void				SetTrackVolume(int32 track, int32 vol);
+			void				SetTrackMute(int32 id, bool state);
+			void				SetTrackPan(int32 id, int32 pan);
+			void				SetTrackSolo(int32 id, bool state);
+			void				SetTrackVolume(int32 id, int32 vol);
 
 protected:
 								CommandRepository();

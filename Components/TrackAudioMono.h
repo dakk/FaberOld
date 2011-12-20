@@ -16,7 +16,7 @@
 class TrackAudioMono : public Track
 {
 public:
-					TrackAudioMono(BRect frame, const char* name, uint32 resizingMode, uint32 flags);
+					TrackAudioMono(BRect frame = BRect(), const char* name = "TrackAudioMono", uint32 resizingMode = B_FOLLOW_ALL_SIDES, uint32 flags = B_WILL_DRAW);
 	virtual 		~TrackAudioMono();
 	virtual	void 	Draw(BRect updateRect);
 };

@@ -21,17 +21,29 @@ ApplicationInit::ApplicationInit()
 ApplicationInit::~ApplicationInit()
 {
 	printf("Destroying singletons...\n");
-	//delete CommandRepository::Instance();
-	//delete ProjectManager::Instance();
-	//delete TrackRepository::Instance();
-	//delete Debug::Instance();
+	delete CommandRepository::Instance();
+	delete ProjectManager::Instance();
+	delete TrackRepository::Instance();
+	delete Debug::Instance();
 	printf("Quit.\n");
 }
 
 
-void ApplicationInit::SetUpSystem(const char* commandLine)
+void ApplicationInit::SetUpSystem(int argc, char **argv)
 {
-    printf("Faber Media Editor\nStartup sequence.\n");
+    printf("Faber Media Editor\n")
+    
+    
+    /* Command line arguments parsing */
+    if(argc > 0)
+    {
+		if(strcmp(argv[1], "--help") == 0 || strcmp(argv[1], "-h") == 0)
+		{
+			printf("There's no command line arguments available yet\n");
+		}
+	}
+    
+    printf("Startup sequence.\n");
 
     /* Show a splash screen during loading */
 

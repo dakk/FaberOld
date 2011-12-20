@@ -31,13 +31,13 @@ void Faber::MessageReceived(BMessage* message)
 }
 
 
-int main()
+int main(int argc, char **argv)
 {
 	Faber *fb = new Faber();
 	try
 	{
 		ApplicationInit apInit;
-		apInit.SetUpSystem(" ");
+		apInit.SetUpSystem(argc, argv);
 
 		fb->Run();
 	}
