@@ -159,7 +159,7 @@ MainView::MainView()
 
 	// Track view	
 	BScrollView *scrollView;
-	fTrackRepository = new TrackRepository(BRect(0, 0, 500, 300), "TrackRepository", B_FOLLOW_ALL_SIDES, B_WILL_DRAW);
+	fTrackRepository = TrackRepository::Instance();
 	scrollView = new BScrollView("TrackScrollView", fTrackRepository, B_FOLLOW_ALL_SIDES, B_WILL_DRAW, true, true);
 	rootLayout->AddView(scrollView);
 	

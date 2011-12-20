@@ -20,7 +20,10 @@
 class TrackRepository : public BView
 {
 public:
-								TrackRepository(BRect frame, const char* name, uint32 resizingMode, uint32 flags);
+								TrackRepository(BRect frame = BRect(0, 0, 500, 300), 
+												const char* name = "TrackRepository", 
+												uint32 resizingMode = B_FOLLOW_ALL_SIDES, 
+												uint32 flags = B_WILL_DRAW);
 								~TrackRepository();
 
 			void				AddTrack(Track *track, int32 position = -1);
