@@ -18,7 +18,7 @@ MainWindow::MainWindow(BRect frame)
 	fMainView = new MainView();
 	GetLayout()->AddView(fMainView);
 	
-	fMainView->MessageReceived(new BMessage(MSG_NEW));
+	fMainView->PostMessage(new BMessage(MSG_NEW));
 }
 
 

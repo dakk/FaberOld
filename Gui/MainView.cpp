@@ -260,7 +260,7 @@ void MainView::MessageReceived(BMessage *message)
 				int32 resp = askAlert->Go();
 				
 				if(resp == 0)
-					MessageReceived(new BMessage(MSG_SAVE));
+					PostMessage(new BMessage(MSG_SAVE));
 			}
 			
 			// Quit
@@ -311,7 +311,7 @@ void MainView::MessageReceived(BMessage *message)
 				int32 resp = askAlert->Go();
 				
 				if(resp == 0)
-					MessageReceived(new BMessage(MSG_SAVE));
+					PostMessage(new BMessage(MSG_SAVE));
 			}
 			ProjectManager::Instance()->Close();
 			fOpenFilePanel->Show();
@@ -332,7 +332,7 @@ void MainView::MessageReceived(BMessage *message)
 				int32 resp = askAlert->Go();
 				
 				if(resp == 0)
-					MessageReceived(new BMessage(MSG_SAVE));
+					PostMessage(new BMessage(MSG_SAVE));
 			}
 			
 			ProjectManager::Instance()->Close();
@@ -351,7 +351,7 @@ void MainView::MessageReceived(BMessage *message)
 				int32 resp = askAlert->Go();
 				
 				if(resp == 0)
-					MessageReceived(new BMessage(MSG_SAVE));
+					PostMessage(new BMessage(MSG_SAVE));
 			}
 			
 			ProjectManager::Instance()->Close();
