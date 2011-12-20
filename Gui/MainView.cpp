@@ -210,7 +210,17 @@ void MainView::UpdateUndoRedo()
 	if(l->CountItems() != 0)
 	{
 		char undoText[128];
-		sprintf(undoText, "Undo '%s'", ((BMessage *) (l->LastItem()))->FindString("Command"));
+		char cmdName[128];
+		
+		switch(((BMessage *) (l->LastItem()))->FindString("Command", &cmdName))
+		{
+			case B_OK:
+				sprintf(undoText, "Undo '%s'", cmdName);
+				break;
+			default:
+				sprintf(undoText, "Undo 'Unknown'");
+		};
+		
 		fUndoMenuItem->SetEnabled(true);
 		fUndoMenuItem->SetLabel(undoText);
 	}

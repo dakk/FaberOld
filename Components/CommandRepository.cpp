@@ -15,10 +15,19 @@ CommandRepository::CommandRepository()
 {
 	fUndoStack = new BList(20);
 	fRedoStack = new BList(20);
+	
+	fUndoStack->Clear();
+	fRedoStack->Clear();
 }
 
 CommandRepository::~CommandRepository()
 {
+	for(i = 0; i < fUndoStack->CountItems(); i++)
+	{
+		BMessage* cmd = (BMessage *) fUndoStack->ItemAt(i);
+		fUndoStack->RemoveItem(cmd);
+		delete cmd;
+	}
 }
 
 
