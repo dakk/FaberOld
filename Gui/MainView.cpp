@@ -210,7 +210,7 @@ void MainView::UpdateUndoRedo()
 	if(l->CountItems() != 0)
 	{
 		char undoText[128];
-		char cmdName[128];
+		const char cmdName[128];
 		
 		switch(((BMessage *) (l->LastItem()))->FindString("Command", (char **) &cmdName))
 		{
