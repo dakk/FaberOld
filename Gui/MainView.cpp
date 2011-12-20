@@ -212,7 +212,7 @@ void MainView::UpdateUndoRedo()
 		char undoText[128];
 		const char *cmdName;
 		
-		switch(((BMessage *) (l->LastItem()))->FindString("Command", &cmdName))
+		/*switch(((BMessage *) (l->LastItem()))->FindString("Command", &cmdName))
 		{
 			case B_OK:
 				sprintf(undoText, "Undo '%s'", cmdName);
@@ -222,7 +222,7 @@ void MainView::UpdateUndoRedo()
 		};
 		
 		fUndoMenuItem->SetEnabled(true);
-		fUndoMenuItem->SetLabel(undoText);
+		fUndoMenuItem->SetLabel(undoText);*/
 	}
 	else
 	{
