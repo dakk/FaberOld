@@ -212,7 +212,7 @@ void MainView::UpdateUndoRedo()
 		char undoText[128];
 		char cmdName[128];
 		
-		switch(((BMessage *) (l->LastItem()))->FindString("Command", &cmdName))
+		switch(((BMessage *) (l->LastItem()))->FindString("Command", (char **) &cmdName))
 		{
 			case B_OK:
 				sprintf(undoText, "Undo '%s'", cmdName);
