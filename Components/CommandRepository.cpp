@@ -59,9 +59,16 @@ CommandRepository* CommandRepository::Instance()
 
 void CommandRepository::SetMasterVolume(int32 vol)
 {
-	// Save old volume in the undo stack
-	int32 oldVolume = TrackRepository::Instance()->MasterVolume();
+	/* Create a bmessage to save old and new data */
+	BMessage *msg = new BMessage(FABER_MSG_MASTER_VOLUME);
+	msg->AddInt32("oldValue", TrackRepository::Instance()->MasterVolume());
+	msg->AddInt32("Value", vol);
+	msg->AddString("Command", "Set Master Volume");
 	
+	/* Add the bmessage in the undo stack */
+	fUndoStack->AddItem(msg);
+		
+	/* Set the value */
 	TrackRepository::Instance()->SetMasterVolume(vol);	
 }
 
@@ -128,8 +135,18 @@ void CommandRepository::SetTrackMute(int32 id, bool state)
 	
 	if(track == NULL)
 		return;
+
+
+	/* Create a bmessage to save old and new data */
+	BMessage *msg = new BMessage(FABER_MSG_TRACK_MUTE);
+	msg->AddBool("oldValue", track->Mute());
+	msg->AddBool("Value", state);
+	msg->AddString("Command", "Mute Track");
 	
-	bool oldState = track->Mute();
+	/* Add the bmessage in the undo stack */
+	fUndoStack->AddItem(msg);
+		
+	/* Set the value */
 	track->SetMute(state);	
 }
 
@@ -140,9 +157,19 @@ void CommandRepository::SetTrackPan(int32 id, int32 pan)
 	
 	if(track == NULL)
 		return;
+
+
+	/* Create a bmessage to save old and new data */
+	BMessage *msg = new BMessage(FABER_MSG_TRACK_PAN);
+	msg->AddInt32("oldValue", track->Pan());
+	msg->AddInt32("Value", pan);
+	msg->AddString("Command", "Set Track Pan");
 	
-	int32 oldPan = track->Pan();
-	track->SetPan(pan);		
+	/* Add the bmessage in the undo stack */
+	fUndoStack->AddItem(msg);
+		
+	/* Set the value */
+	track->SetPan(pan);	
 }
 
 
@@ -152,9 +179,19 @@ void CommandRepository::SetTrackSolo(int32 id, bool state)
 	
 	if(track == NULL)
 		return;
+
+
+	/* Create a bmessage to save old and new data */
+	BMessage *msg = new BMessage(FABER_MSG_TRACK_SOLO);
+	msg->AddBool("oldValue", track->Solo());
+	msg->AddBool("Value", state);
+	msg->AddString("Command", "Solo Track");
 	
-	bool oldState = track->Solo();
-	track->SetSolo(state);	
+	/* Add the bmessage in the undo stack */
+	fUndoStack->AddItem(msg);
+		
+	/* Set the value */
+	track->SetSolo(state);		
 }
 
 
@@ -164,9 +201,19 @@ void CommandRepository::SetTrackVolume(int32 id, int32 vol)
 	
 	if(track == NULL)
 		return;
+
+
+	/* Create a bmessage to save old and new data */
+	BMessage *msg = new BMessage(FABER_MSG_TRACK_VOLUME);
+	msg->AddInt32("oldValue", track->Volume());
+	msg->AddInt32("Value", vol);
+	msg->AddString("Command", "Set Track Volume");
 	
-	int32 oldVolume = track->Volume();
-	track->SetVolume(vol);		
+	/* Add the bmessage in the undo stack */
+	fUndoStack->AddItem(msg);
+		
+	/* Set the value */
+	track->SetVolume(vol);	
 }
 
 

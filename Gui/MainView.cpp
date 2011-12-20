@@ -210,9 +210,9 @@ void MainView::UpdateUndoRedo()
 	if(l->CountItems() != 0)
 	{
 		char undoText[128];
-		//sprintf(undoText, "Undo '%s'", ((Command *) (l->LastItem()))->Name());
+		sprintf(undoText, "Undo '%s'", ((BMessage *) (l->LastItem()))->FindString("Command"));
 		fUndoMenuItem->SetEnabled(true);
-		//fUndoMenuItem->SetLabel(undoText);
+		fUndoMenuItem->SetLabel(undoText);
 	}
 	else
 	{
