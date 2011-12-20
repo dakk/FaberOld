@@ -30,7 +30,7 @@ TrackRepository::TrackRepository(BRect frame, const char* name, uint32 resizingM
 	
 	fTimeTrack = new TimeTrack(BRect(0, 30, 300, 30), "TimeTrack", B_FOLLOW_ALL_SIDES, B_WILL_DRAW);
 	fLayout->AddView(fTimeTrack);
-	//AddChild(fTimeTrack);
+	AddChild(fTimeTrack);
 }
 
 

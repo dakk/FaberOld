@@ -89,9 +89,19 @@ void CommandRepository::AddTrack(TrackType type)
 	{
 		#ifdef AUDIO
 		case ETT_AUDIO_MONO:
-		{
+		{		
 			track = new TrackAudioMono();
 			TrackRepository::Instance()->AddTrack(track);
+			
+			
+			/* Create a bmessage to save old and new data */
+			BMessage *msg = new BMessage(FABER_MSG_TRACK_ADD);
+			msg->AddInt32("Id", TrackRepository::Instance()->TrackList()->IndexOf(track));
+			msg->AddString("Command", "Add Mono Track");
+			
+			/* Add the bmessage in the undo stack */
+			fUndoStack->AddItem(msg);
+			
 		}		
 		case ETT_AUDIO_STEREO:
 		{
