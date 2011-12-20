@@ -68,12 +68,14 @@ void CommandRepository::SetMasterVolume(int32 vol)
 
 void CommandRepository::AddTrack(TrackType type)
 {
+	Track *track;
+	
 	switch(type)
 	{
 		#ifdef AUDIO
 		case ETT_AUDIO_MONO:
 		{
-			Track *track = new TrackAudioMono();
+			track = new TrackAudioMono();
 			TrackRepository::Instance()->AddTrack(track);
 		}		
 		case ETT_AUDIO_STEREO:
@@ -122,48 +124,48 @@ void CommandRepository::AddTrack(TrackType type)
 
 void CommandRepository::SetTrackMute(int32 id, bool state)
 {	
-	track = (Track*) TrackRepository::Instance()->TrackList()->ItemAt(id);
+	Track *track = (Track*) TrackRepository::Instance()->TrackList()->ItemAt(id);
 	
-	if(fTrack == NULL)
+	if(track == NULL)
 		return;
 	
-	bool oldState = track->GetMute();
+	bool oldState = track->Mute();
 	track->SetMute(state);	
 }
 
 
 void CommandRepository::SetTrackPan(int32 id, int32 pan)
 {
-	track = (Track*) TrackRepository::Instance()->TrackList()->ItemAt(id);
+	Track *track = (Track*) TrackRepository::Instance()->TrackList()->ItemAt(id);
 	
-	if(fTrack == NULL)
+	if(track == NULL)
 		return;
 	
-	int32 oldPan = track->GetPan();
+	int32 oldPan = track->Pan();
 	track->SetPan(pan);		
 }
 
 
 void CommandRepository::SetTrackSolo(int32 id, bool state)
 {
-	track = (Track*) TrackRepository::Instance()->TrackList()->ItemAt(id);
+	Track *track = (Track*) TrackRepository::Instance()->TrackList()->ItemAt(id);
 	
-	if(fTrack == NULL)
+	if(track == NULL)
 		return;
 	
-	bool oldState = track->GetSolo();
+	bool oldState = track->Solo();
 	track->SetSolo(state);	
 }
 
 
 void CommandRepository::SetTrackVolume(int32 id, int32 vol)
 {
-	track = (Track*) TrackRepository::Instance()->TrackList()->ItemAt(id);
+	Track *track = (Track*) TrackRepository::Instance()->TrackList()->ItemAt(id);
 	
-	if(fTrack == NULL)
+	if(track == NULL)
 		return;
 	
-	int32 oldVolume = track->GetVolume();
+	int32 oldVolume = track->Volume();
 	track->SetVolume(vol);		
 }
 

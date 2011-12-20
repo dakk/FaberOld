@@ -10,6 +10,7 @@
 
 #include <List.h>
 #include "Track.h"
+#include "TrackAudioMono.h"
 #include "Globals.h"
 
 class CommandRepository

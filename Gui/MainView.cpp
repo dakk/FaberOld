@@ -132,8 +132,8 @@ MainView::MainView()
 	// Toolbar	
 	BGroupView* buttonGroup = new BGroupView(B_HORIZONTAL);
 	
-	buttonGroup->GroupLayout()->AddView(new ImageButton(BRect(0,0,24,24), "PlayIcon", "Data/timeline/play.png",
-														"Data/timeline/play.png", new BMessage(MSG_PLAY)));
+	//buttonGroup->GroupLayout()->AddView(new ImageButton(BRect(0,0,24,24), "PlayIcon", "Data/timeline/play.png",
+	//													"Data/timeline/play.png", new BMessage(MSG_PLAY)));
 	BButton *b;
 	
 	

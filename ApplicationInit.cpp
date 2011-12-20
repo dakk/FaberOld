@@ -6,6 +6,7 @@
  *		Davide Gessa, dak.linux@gmail.com
  */
 #include <stdio.h>
+#include <string.h>
 #include "ApplicationInit.h"
 
 
@@ -31,11 +32,11 @@ ApplicationInit::~ApplicationInit()
 
 void ApplicationInit::SetUpSystem(int argc, char **argv)
 {
-    printf("Faber Media Editor\n")
+    printf("Faber Media Editor\n");
     
     
     /* Command line arguments parsing */
-    if(argc > 0)
+    if(argc > 1)
     {
 		if(strcmp(argv[1], "--help") == 0 || strcmp(argv[1], "-h") == 0)
 		{
