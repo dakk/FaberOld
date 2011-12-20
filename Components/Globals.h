@@ -21,15 +21,11 @@
 const int32 WINDOW_DEFAULT_SIZE_X			= 600;
 const int32 WINDOW_DEFAULT_SIZE_Y			= 400;
 
-const int32 MAX_UNDABLE_COMMANDS			= 20;
-const int32 MAX_COMMANDS					= 200;
-
-
-const int32	FABER_MSG_MASTER_VOLUME			= "FUnd";
-const int32 FABER_MSG_TRACK_ADD				= "FAdd";
-const int32	FABER_MSG_TRACK_MUTE			= "FMut";
-const int32	FABER_MSG_TRACK_SOLO			= "FSol";
-const int32	FABER_MSG_TRACK_VOLUME			= "FVol";
-const int32 FABER_MSG_TRACK_PAN				= "FPan";
+const int32	FABER_MSG_MASTER_VOLUME			= 'FMVo';
+const int32 FABER_MSG_TRACK_ADD				= 'FTAd';
+const int32	FABER_MSG_TRACK_MUTE			= 'FTMu';
+const int32	FABER_MSG_TRACK_SOLO			= 'FTSo';
+const int32	FABER_MSG_TRACK_VOLUME			= 'FTVo';
+const int32 FABER_MSG_TRACK_PAN				= 'FTPa';
 
 #endif

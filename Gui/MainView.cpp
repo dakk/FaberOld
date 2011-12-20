@@ -210,9 +210,9 @@ void MainView::UpdateUndoRedo()
 	if(l->CountItems() != 0)
 	{
 		char undoText[128];
-		sprintf(undoText, "Undo '%s'", ((Command *) (l->LastItem()))->Name());
+		//sprintf(undoText, "Undo '%s'", ((Command *) (l->LastItem()))->Name());
 		fUndoMenuItem->SetEnabled(true);
-		fUndoMenuItem->SetLabel(undoText);
+		//fUndoMenuItem->SetLabel(undoText);
 	}
 	else
 	{
@@ -260,11 +260,11 @@ void MainView::MessageReceived(BMessage *message)
 				int32 resp = askAlert->Go();
 				
 				if(resp == 0)
-					PostMessage(new BMessage(MSG_SAVE));
+					Looper()->PostMessage(new BMessage(MSG_SAVE));
 			}
 			
 			// Quit
-			be_app->PostMessage(B_QUIT_REQUESTED);
+			be_app->Looper()->PostMessage(B_QUIT_REQUESTED);
             break;
 		}
 
@@ -311,7 +311,7 @@ void MainView::MessageReceived(BMessage *message)
 				int32 resp = askAlert->Go();
 				
 				if(resp == 0)
-					PostMessage(new BMessage(MSG_SAVE));
+					Looper()->PostMessage(new BMessage(MSG_SAVE));
 			}
 			ProjectManager::Instance()->Close();
 			fOpenFilePanel->Show();
@@ -332,7 +332,7 @@ void MainView::MessageReceived(BMessage *message)
 				int32 resp = askAlert->Go();
 				
 				if(resp == 0)
-					PostMessage(new BMessage(MSG_SAVE));
+					Looper()->PostMessage(new BMessage(MSG_SAVE));
 			}
 			
 			ProjectManager::Instance()->Close();
@@ -351,7 +351,7 @@ void MainView::MessageReceived(BMessage *message)
 				int32 resp = askAlert->Go();
 				
 				if(resp == 0)
-					PostMessage(new BMessage(MSG_SAVE));
+					Looper()->PostMessage(new BMessage(MSG_SAVE));
 			}
 			
 			ProjectManager::Instance()->Close();
@@ -502,7 +502,7 @@ void MainView::MessageReceived(BMessage *message)
         #ifdef MIDI
         case MSG_ADD_MIDI:
 		{
-			CommandRepository::Instance()->ExecuteCommand(COMMAND_TRACK_ADD, (void *) ETT_MIDI);
+			//CommandRepository::Instance()->ExecuteCommand(COMMAND_TRACK_ADD, (void *) ETT_MIDI);
             UpdateUndoRedo();
             break;
         }
@@ -511,7 +511,7 @@ void MainView::MessageReceived(BMessage *message)
         #ifdef SUBTITLE
         case MSG_ADD_SUBTITLE:
 		{
-			CommandRepository::Instance()->ExecuteCommand(COMMAND_TRACK_ADD, (void *) ETT_SUBTITLE);
+			//CommandRepository::Instance()->ExecuteCommand(COMMAND_TRACK_ADD, (void *) ETT_SUBTITLE);
             UpdateUndoRedo();
             break;
         }
@@ -520,7 +520,7 @@ void MainView::MessageReceived(BMessage *message)
         #ifdef VIDEO
         case MSG_ADD_VIDEO:
 		{
-			CommandRepository::Instance()->ExecuteCommand(COMMAND_TRACK_ADD, (void *) ETT_VIDEO);
+			//CommandRepository::Instance()->ExecuteCommand(COMMAND_TRACK_ADD, (void *) ETT_VIDEO);
             UpdateUndoRedo();
             break;
         }
@@ -529,14 +529,14 @@ void MainView::MessageReceived(BMessage *message)
         #ifdef AUDIO
         case MSG_ADD_AUDIO_MONO:
 		{
-			CommandRepository::Instance()->ExecuteCommand(COMMAND_TRACK_ADD, (void *) ETT_AUDIO_MONO);
+			//CommandRepository::Instance()->ExecuteCommand(COMMAND_TRACK_ADD, (void *) ETT_AUDIO_MONO);
             UpdateUndoRedo();
             break;
         }
 
         case MSG_ADD_AUDIO_STEREO:
 		{
-			CommandRepository::Instance()->ExecuteCommand(COMMAND_TRACK_ADD, (void *) ETT_AUDIO_STEREO);
+			//CommandRepository::Instance()->ExecuteCommand(COMMAND_TRACK_ADD, (void *) ETT_AUDIO_STEREO);
             UpdateUndoRedo();
             break;
         }
@@ -544,7 +544,7 @@ void MainView::MessageReceived(BMessage *message)
 		#ifdef AUDIO_SURROUND
         case MSG_ADD_AUDIO_SURROUND:
 		{
-			CommandRepository::Instance()->ExecuteCommand(COMMAND_TRACK_ADD, (void *) ETT_AUDIO_SURROUND);
+			//CommandRepository::Instance()->ExecuteCommand(COMMAND_TRACK_ADD, (void *) ETT_AUDIO_SURROUND);
             UpdateUndoRedo();
             break;
         }

@@ -10,17 +10,12 @@
 
 #include <List.h>
 #include "Globals.h"
-#include "Command.h"
 
 class CommandRepository
 {
 public:
 								~CommandRepository();
 
-			bool				AddCommand(Command* command, int32 id);
-			bool				CommandExists(int32 id);
-			bool				ExecuteCommand(int32 id);
-			void* 				ExecuteCommand(int32 id, void* p1, void* p2 = NULL, void* p3 = NULL);
 	static 	CommandRepository*  Instance();
 			BList*				UndoStack();
 			void				Undo();
@@ -28,13 +23,11 @@ public:
 
 protected:
 								CommandRepository();
-			void				AddUsedCommand(Command* clone);
 
 private:
     static 	CommandRepository*	fInstance;
 		    BList*				fUndoStack;
 		    BList*				fRedoStack;
-			Command*			fCommands[MAX_COMMANDS];
 };
 
 #endif

@@ -7,13 +7,6 @@
  */
 #include <stdio.h>
 #include "ApplicationInit.h"
-#include "CommandTrackAdd.h"
-#include "CommandTrackMute.h"
-#include "CommandTrackSolo.h"
-#include "CommandTrackVolume.h"
-#include "CommandTrackPan.h"
-#include "CommandMasterVolume.h"
-
 
 
 ApplicationInit::ApplicationInit()
@@ -47,20 +40,7 @@ void ApplicationInit::SetUpSystem(const char* commandLine)
     printf("Creating main window...\n");
     fMainWindow = new MainWindow(BRect(0, 0, WINDOW_DEFAULT_SIZE_X, WINDOW_DEFAULT_SIZE_Y));
 
-    /* Add all commands */
-    printf("Adding commands...\n");
-	CommandRepository::Instance()->AddCommand(new CommandTrackAdd(), COMMAND_TRACK_ADD);
-	CommandRepository::Instance()->AddCommand(new CommandTrackMute(), COMMAND_TRACK_MUTE);
-	CommandRepository::Instance()->AddCommand(new CommandTrackSolo(), COMMAND_TRACK_SOLO);
-	CommandRepository::Instance()->AddCommand(new CommandTrackVolume(), COMMAND_TRACK_VOLUME);
-	CommandRepository::Instance()->AddCommand(new CommandMasterVolume(), COMMAND_MASTER_VOLUME);
-	CommandRepository::Instance()->AddCommand(new CommandTrackPan(), COMMAND_TRACK_PAN);
 
 	printf("Faber is loaded.\n");
 	fMainWindow->Show();
-
-	CommandRepository::Instance()->ExecuteCommand(COMMAND_TRACK_ADD, (void *) ETT_AUDIO_MONO);
-	CommandRepository::Instance()->ExecuteCommand(COMMAND_TRACK_ADD, (void *) ETT_AUDIO_MONO);	
-	CommandRepository::Instance()->ExecuteCommand(COMMAND_TRACK_ADD, (void *) ETT_AUDIO_MONO);
-	CommandRepository::Instance()->ExecuteCommand(COMMAND_TRACK_ADD, (void *) ETT_AUDIO_MONO);
 }
