@@ -25,10 +25,7 @@
 
 MixerView::~MixerView()
 {
-	int i;
-	
-	for(i = 0; i < fEntryList->CountItems(); i++)
-	{
+	for (int i = 0; i < fEntryList->CountItems(); i++) {
 		MixerTrackEntry	*trackEntry = (MixerTrackEntry*) fEntryList->ItemAt(i);
 		
 		if(trackEntry != NULL)
@@ -142,15 +139,13 @@ MixerView::MixerView()
 
 void MixerView::AttachedToWindow()
 {
-	int i;
-	
 	fMasterVolume->SetTarget(this);
 	
-	for(i = 0; i < fEntryList->CountItems(); i++)
+	for (int i = 0; i < fEntryList->CountItems(); i++)
 	{
 		MixerTrackEntry	*trackEntry = (MixerTrackEntry*) fEntryList->ItemAt(i);
 		
-		if(trackEntry != NULL)
+		if (trackEntry != NULL)
 		{
 			trackEntry->VolumeSlider->SetTarget(this);
 			trackEntry->SoloBox->SetTarget(this);
@@ -170,99 +165,80 @@ void MixerView::MessageReceived(BMessage *message)
 	int32 tracks = fEntryList->CountItems();
 	int i;
 	
-	if(message->what == MSG_MIXER_MASTER)
-	{
+	if (message->what == MSG_MIXER_MASTER) {
 		CommandRepository::Instance()->SetMasterVolume((int32) fMasterVolume->Value());
-	}
-	else if((message->what >= MSG_MIXER_SOLO) && (message->what <= (MSG_MIXER_SOLO + tracks)))
-	{
+	} else if ((message->what >= MSG_MIXER_SOLO) 
+		&& (message->what <= (MSG_MIXER_SOLO + tracks))) {
+
 		MixerTrackEntry *trackEntry = NULL;
 		int32 trackId = message->what - MSG_MIXER_SOLO + 1;	
 					
-		for(i = 0; i < tracks; i++)
-		{
-			if((((MixerTrackEntry*) (fEntryList->ItemAt(i)))->SoloBox->Message()->what) == message->what)
-			{
+		for (i = 0; i < tracks; i++) {
+			if((((MixerTrackEntry*) (fEntryList->ItemAt(i)))->SoloBox->Message()->what) == message->what) {
 				trackEntry = ((MixerTrackEntry*) (fEntryList->ItemAt(i)));
 				break;
 			}
 		}
 		
-		if(trackEntry != NULL)
-		{
+		if (trackEntry != NULL) {
 			bool state = (bool) trackEntry->SoloBox->Value();
 	
 			CommandRepository::Instance()->SetTrackSolo(trackEntry->TrackId, state);
 			//printf("Solo: %d %d\n", state, trackEntry->TrackId);
 		}
-	}
-	else if((message->what >= MSG_MIXER_MUTE) && (message->what <= (MSG_MIXER_MUTE + tracks)))
-	{
+	} else if ((message->what >= MSG_MIXER_MUTE) && (message->what <= (MSG_MIXER_MUTE + tracks))) {
 		MixerTrackEntry *trackEntry = NULL;
 		int32 trackId = message->what - MSG_MIXER_MUTE + 1;	
 					
-		for(i = 0; i < tracks; i++)
-		{
-			if((((MixerTrackEntry*) (fEntryList->ItemAt(i)))->MuteBox->Message()->what) == message->what)
-			{
+		for (i = 0; i < tracks; i++) {
+			if ((((MixerTrackEntry*) (fEntryList->ItemAt(i)))->MuteBox->Message()->what) == message->what) {
 				trackEntry = ((MixerTrackEntry*) (fEntryList->ItemAt(i)));
 				break;
 			}
 		}
 		
-		if(trackEntry != NULL)
-		{
+		if (trackEntry != NULL) {
 			bool state = (bool) trackEntry->MuteBox->Value();
 	
 			CommandRepository::Instance()->SetTrackMute(trackEntry->TrackId, state);
 			//printf("Mute: %d %d\n", state, trackEntry->TrackId);
 		}
-	}
-	else if((message->what >= MSG_MIXER_VOLUME) && (message->what <= (MSG_MIXER_VOLUME + tracks)))
-	{
+	} else if ((message->what >= MSG_MIXER_VOLUME) && (message->what <= (MSG_MIXER_VOLUME + tracks))) {
 		MixerTrackEntry *trackEntry = NULL;
 		int32 trackId = message->what - MSG_MIXER_VOLUME + 1;	
 					
-		for(i = 0; i < tracks; i++)
+		for (i = 0; i < tracks; i++)
 		{
-			if((((MixerTrackEntry*) (fEntryList->ItemAt(i)))->VolumeSlider->Message()->what) == message->what)
-			{
+			if ((((MixerTrackEntry*) (fEntryList->ItemAt(i)))->VolumeSlider->Message()->what) == message->what) {
 				trackEntry = ((MixerTrackEntry*) (fEntryList->ItemAt(i)));
 				break;
 			}
 		}
 		
-		if(trackEntry != NULL)
-		{
+		if (trackEntry != NULL) {
 			int32 vol = trackEntry->VolumeSlider->Value();
 	
 			CommandRepository::Instance()->SetTrackVolume(trackEntry->TrackId, (int32) vol);
 			//printf("Volume: %d %d\n", vol, trackEntry->TrackId);
 		}
-	}
-	else if((message->what >= MSG_MIXER_PAN) && (message->what <= (MSG_MIXER_PAN + tracks)))
-	{
+	} else if ((message->what >= MSG_MIXER_PAN) && (message->what <= (MSG_MIXER_PAN + tracks))) {
 		MixerTrackEntry *trackEntry = NULL;
 		int32 trackId = message->what - MSG_MIXER_PAN + 1;	
 					
-		for(i = 0; i < tracks; i++)
-		{
-			if((((MixerTrackEntry*) (fEntryList->ItemAt(i)))->PanKnob->Message()->what) == message->what)
-			{
+		for(i = 0; i < tracks; i++) {
+			if((((MixerTrackEntry*) (fEntryList->ItemAt(i)))->PanKnob->Message()->what) == message->what) {
 				trackEntry = ((MixerTrackEntry*) (fEntryList->ItemAt(i)));
 				break;
 			}
 		}
 		
-		if(trackEntry != NULL)
-		{
+		if(trackEntry != NULL) {
 			int32 pan = trackEntry->PanKnob->Value();
 	
 			CommandRepository::Instance()->SetTrackPan(trackEntry->TrackId, pan);
 			//printf("Volume: %d %d\n", vol, trackEntry->TrackId);
 		}
-	}
-	else
+	} else
 		BView::MessageReceived(message);
 		
 }
