@@ -100,23 +100,31 @@ MainView::MainView()
 	fTrackAddMenu = new BMenu("Add Track");
 	
 	#ifdef AUDIO
-	fTrackAddMenu->AddItem(new BMenuItem("Audio Mono", new BMessage(MSG_ADD_AUDIO_MONO)));
-	fTrackAddMenu->AddItem(new BMenuItem("Audio Stereo", new BMessage(MSG_ADD_AUDIO_STEREO)));
+	fTrackAddMenu->AddItem(new BMenuItem("Audio Mono", 
+		new BMessage(MSG_ADD_AUDIO_MONO)));
+
+	fTrackAddMenu->AddItem(new BMenuItem("Audio Stereo",
+		new BMessage(MSG_ADD_AUDIO_STEREO)));
+
 	#ifdef AUDIO_SURROUND
-	fTrackAddMenu->AddItem(new BMenuItem("Audio Surround", new BMessage(MSG_ADD_AUDIO_SURROUND)));
+	fTrackAddMenu->AddItem(new BMenuItem("Audio Surround",
+		new BMessage(MSG_ADD_AUDIO_SURROUND)));
 	#endif
 	#endif
 	
 	#ifdef MIDI
-	fTrackAddMenu->AddItem(new BMenuItem("Midi", new BMessage(MSG_ADD_MIDI)));
+	fTrackAddMenu->AddItem(new BMenuItem("Midi",
+		new BMessage(MSG_ADD_MIDI)));
 	#endif
 	
 	#ifdef VIDEO
-	fTrackAddMenu->AddItem(new BMenuItem("Video", new BMessage(MSG_ADD_VIDEO)));
+	fTrackAddMenu->AddItem(new BMenuItem("Video",
+		new BMessage(MSG_ADD_VIDEO)));
 	#endif
 	
 	#ifdef SUBTITLE
-	fTrackAddMenu->AddItem(new BMenuItem("Subtitles", new BMessage(MSG_ADD_SUBTITLE)));
+	fTrackAddMenu->AddItem(new BMenuItem("Subtitles",
+		new BMessage(MSG_ADD_SUBTITLE)));
 	#endif
 	
 	fTrackMenu->AddItem(fTrackAddMenu);
@@ -151,7 +159,9 @@ MainView::MainView()
 	buttonGroup->GroupLayout()->AddView(b);
 	b = new BButton("Paste", new BMessage(MSG_PASTE));						
 	buttonGroup->GroupLayout()->AddView(b);*/
-	fPositionControl = new BTextControl(BRect(), "PositionControl", "", "0", new BMessage(MSG_SEEK_TO));
+	fPositionControl = new BTextControl(BRect(), "PositionControl",
+		"", "0", new BMessage(MSG_SEEK_TO));
+
 	buttonGroup->GroupLayout()->AddView(fPositionControl);
 
 	rootLayout->AddView(buttonGroup);
@@ -160,7 +170,10 @@ MainView::MainView()
 	// Track view	
 	BScrollView *scrollView;
 	fTrackRepository = TrackRepository::Instance();
-	scrollView = new BScrollView("TrackScrollView", fTrackRepository, B_FOLLOW_ALL_SIDES, B_WILL_DRAW, true, true);
+
+	scrollView = new BScrollView("TrackScrollView", fTrackRepository,
+		B_FOLLOW_ALL_SIDES, B_WILL_DRAW, true, true);
+
 	rootLayout->AddView(scrollView);
 	
 
@@ -207,8 +220,7 @@ void MainView::UpdateUndoRedo()
 {
 	BList *l = CommandRepository::Instance()->UndoStack();
 	
-	if(l->CountItems() != 0)
-	{
+	if (l->CountItems() != 0) {
 		char undoText[128];
 		const char *cmdName;
 		
@@ -223,9 +235,7 @@ void MainView::UpdateUndoRedo()
 		
 		fUndoMenuItem->SetEnabled(true);
 		fUndoMenuItem->SetLabel(undoText);
-	}
-	else
-	{
+	} else {
 		fUndoMenuItem->SetEnabled(false);
 		fUndoMenuItem->SetLabel("Undo");
 	}
@@ -236,7 +246,7 @@ void MainView::UpdateTitle()
 {
 	char newTitle[512];
 	
-	if(ProjectManager::Instance()->Path().Path() != NULL)
+	if (ProjectManager::Instance()->Path().Path() != NULL)
 		sprintf(newTitle, "Faber Media Editor - %s (%s)", 
 				ProjectManager::Instance()->Name(), 
 				ProjectManager::Instance()->Path().Path());
@@ -261,15 +271,14 @@ void MainView::MessageReceived(BMessage *message)
         /* File commands */
         case MSG_QUIT:
         {
-			if(ProjectManager::Instance()->IsUpdated())
-			{
+			if (ProjectManager::Instance()->IsUpdated()) {
 				BAlert *askAlert = new BAlert("Quit", "Are you sure to quit without saving?", "Save", "Quit", NULL, 
 					B_WIDTH_AS_USUAL, B_OFFSET_SPACING, B_WARNING_ALERT);
 				
 				askAlert->SetShortcut(0, B_ESCAPE);
 				int32 resp = askAlert->Go();
 				
-				if(resp == 0)
+				if (resp == 0)
 					Looper()->PostMessage(new BMessage(MSG_SAVE));
 			}
 			
@@ -285,18 +294,15 @@ void MainView::MessageReceived(BMessage *message)
 			BPath path;
 			
 			fOpenFilePanel->Hide();
-			if(fOpenFilePanel->GetNextSelectedRef(&ref) == B_ENTRY_NOT_FOUND)
+			if (fOpenFilePanel->GetNextSelectedRef(&ref) == B_ENTRY_NOT_FOUND)
 				break;
 				
 			entry = new BEntry(&ref);
 			entry->GetPath(&path);
 			
 			ProjectManager::Instance()->SetPath(path);
-			if(ProjectManager::Instance()->Load())
-			{
-			}
-			else
-			{
+			if (ProjectManager::Instance()->Load()) {
+			} else {
 				BAlert *alert = new BAlert("Warning", "Invalid file", "OK", NULL, 
 					NULL, B_WIDTH_FROM_WIDEST, B_EVEN_SPACING, B_WARNING_ALERT);
 				alert->Go();
@@ -312,15 +318,16 @@ void MainView::MessageReceived(BMessage *message)
 			
         case MSG_OPEN:
         {
-			if(ProjectManager::Instance()->IsUpdated())
-			{
-				BAlert *askAlert = new BAlert("Open", "Are you sure to open another project without saving?", "Save", "Open", NULL, 
-					B_WIDTH_AS_USUAL, B_OFFSET_SPACING, B_WARNING_ALERT);
+			if (ProjectManager::Instance()->IsUpdated()) {
+				BAlert *askAlert = new BAlert("Open",
+					"Are you sure to open another project without saving?", 
+					"Save", "Open", NULL, B_WIDTH_AS_USUAL,
+					B_OFFSET_SPACING, B_WARNING_ALERT);
 				
 				askAlert->SetShortcut(0, B_ESCAPE);
 				int32 resp = askAlert->Go();
 				
-				if(resp == 0)
+				if (resp == 0)
 					Looper()->PostMessage(new BMessage(MSG_SAVE));
 			}
 			ProjectManager::Instance()->Close();
@@ -333,10 +340,11 @@ void MainView::MessageReceived(BMessage *message)
         
         case MSG_CLOSE:
         {
-        	if(ProjectManager::Instance()->IsUpdated())
-			{
-				BAlert *askAlert = new BAlert("Open", "Are you sure to close this project without saving?", "Save", "Close", NULL, 
-					B_WIDTH_AS_USUAL, B_OFFSET_SPACING, B_WARNING_ALERT);
+        	if (ProjectManager::Instance()->IsUpdated()) {
+				BAlert *askAlert = new BAlert("Open",
+					"Are you sure to close this project without saving?",
+					"Save", "Close", NULL, B_WIDTH_AS_USUAL,
+					B_OFFSET_SPACING, B_WARNING_ALERT);
 				
 				askAlert->SetShortcut(0, B_ESCAPE);
 				int32 resp = askAlert->Go();
@@ -352,15 +360,16 @@ void MainView::MessageReceived(BMessage *message)
         
         case MSG_NEW:
         {
-			if(ProjectManager::Instance()->IsUpdated())
-			{
-				BAlert *askAlert = new BAlert("New", "Are you sure to create a new project without saving?", "Save", "New", NULL, 
-					B_WIDTH_AS_USUAL, B_OFFSET_SPACING, B_WARNING_ALERT);
+			if (ProjectManager::Instance()->IsUpdated()) {
+				BAlert *askAlert = new BAlert("New", 
+					"Are you sure to create a new project without saving?",
+					"Save", "New", NULL, B_WIDTH_AS_USUAL, 
+					B_OFFSET_SPACING, B_WARNING_ALERT);
 				
 				askAlert->SetShortcut(0, B_ESCAPE);
 				int32 resp = askAlert->Go();
 				
-				if(resp == 0)
+				if (resp == 0)
 					Looper()->PostMessage(new BMessage(MSG_SAVE));
 			}
 			
@@ -379,7 +388,7 @@ void MainView::MessageReceived(BMessage *message)
 			BPath path;
 			
 			fSaveFilePanel->Hide();
-			if(fSaveFilePanel->GetNextSelectedRef(&ref) == B_ENTRY_NOT_FOUND)
+			if (fSaveFilePanel->GetNextSelectedRef(&ref) == B_ENTRY_NOT_FOUND)
 				break;
 				
 			entry = new BEntry(&ref);
@@ -387,11 +396,8 @@ void MainView::MessageReceived(BMessage *message)
 			
 			ProjectManager::Instance()->SetPath(path);
 						
-			if(ProjectManager::Instance()->Save())
-			{
-			}
-			else
-			{
+			if (ProjectManager::Instance()->Save()) {
+			} else {
 				BAlert *alert = new BAlert("Warning", "Invalid file", "OK", NULL, 
 					NULL, B_WIDTH_FROM_WIDEST, B_EVEN_SPACING, B_WARNING_ALERT);
 				alert->Go();
@@ -406,14 +412,11 @@ void MainView::MessageReceived(BMessage *message)
 			if(!ProjectManager::Instance()->IsUpdated())
 				break;
 			
-			if(ProjectManager::Instance()->Path().Path() == NULL)
-			{
+			if(ProjectManager::Instance()->Path().Path() == NULL) {
 				fSaveFilePanel->Show();
 				fSaveFilePanel->SetTarget((BHandler*) this);
 				fSaveFilePanel->SetMessage(new BMessage(MSG_FILE_SAVE));
-			}	
-			else
-			{
+			} else {
 				ProjectManager::Instance()->Save();
 				UpdateTitle();
 			}
@@ -464,12 +467,9 @@ void MainView::MessageReceived(BMessage *message)
 		/* View commands */
 		case MSG_FULLSCREEN:
 		{
-			if(Window()->Look() != B_BORDERED_WINDOW_LOOK)
-			{
+			if (Window()->Look() != B_BORDERED_WINDOW_LOOK) {
 				Window()->SetLook(B_BORDERED_WINDOW_LOOK);
-			}
-			else
-			{
+			} else {
 				Window()->SetLook(B_TITLED_WINDOW_LOOK);
 			}
 			
@@ -484,11 +484,13 @@ void MainView::MessageReceived(BMessage *message)
 		}
 		
 		case MSG_ZOOM_IN:
-			TrackRepository::Instance()->SetZoomLevel(TrackRepository::Instance()->ZoomLevel() / 1.5);
+			TrackRepository::Instance()->SetZoomLevel(
+				TrackRepository::Instance()->ZoomLevel() / 1.5);
 			break;
 			
 		case MSG_ZOOM_OUT:
-			TrackRepository::Instance()->SetZoomLevel(TrackRepository::Instance()->ZoomLevel() * 1.5);
+			TrackRepository::Instance()->SetZoomLevel(
+				TrackRepository::Instance()->ZoomLevel() * 1.5);
 			break;
 		
         /* Help commands */
