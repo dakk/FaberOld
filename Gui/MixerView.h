@@ -18,11 +18,11 @@
 #include "Knob.h"
 
 
-const int32 MSG_MIXER_PAN		=  0x000000F0;
-const int32 MSG_MIXER_MUTE		=  0x000F0000;
-const int32 MSG_MIXER_SOLO		=  0xF0000000;
-const int32 MSG_MIXER_VOLUME	=  0x00000001;
-const int32 MSG_MIXER_MASTER	=  0x00000000;
+const uint32 MSG_MIXER_PAN		=  0x000000F0;
+const uint32 MSG_MIXER_MUTE		=  0x000F0000;
+const uint32 MSG_MIXER_SOLO		=  0xF0000000;
+const uint32 MSG_MIXER_VOLUME	=  0x00000001;
+const uint32 MSG_MIXER_MASTER	=  0x00000000;
 
 
 typedef struct

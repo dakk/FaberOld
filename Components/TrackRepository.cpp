@@ -96,7 +96,7 @@ TrackRepository* TrackRepository::Instance()
 void TrackRepository::AddTrack(Track *track, int32 position)
 {
 	BLayoutItem *item;
-	/*
+	
 	if(position == -1)
 	{
 		fTrackList->AddItem((void *) track);
@@ -108,7 +108,7 @@ void TrackRepository::AddTrack(Track *track, int32 position)
 		fTrackList->AddItem((void *) track, position);
 		//AddChild(track);
 		item = fLayout->AddView(position, track);
-	}*/
+	}
 }
 
 
