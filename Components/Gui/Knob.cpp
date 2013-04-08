@@ -22,16 +22,15 @@
 
 
 
-Knob::Knob(		BRect frame, 
-				const char* name, 
-				const char* label,
-				BMessage* message, 
-				uint32 minValue,
-				uint32 maxValue,
-				uint32 resizingMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
-				uint32 flags = B_WILL_DRAW | B_NAVIGABLE)
-			:
-			BView(frame, name, resizingMode, flags)
+Knob::Knob(BRect frame, const char* name, const char* label,
+	BMessage* message, uint32 minValue, uint32 maxValue,
+	uint32 resizingMode,
+	uint32 flags)
+	:
+	BView(frame, name, resizingMode, flags),
+	resizingMode(B_FOLLOW_LEFT | B_FOLLOW_TOP),
+	flags(B_WILL_DRAW | B_NAVIGABLE)
+	
 {
 	SetViewColor(ui_color(B_PANEL_BACKGROUND_COLOR));
 	
