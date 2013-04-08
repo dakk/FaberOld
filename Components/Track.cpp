@@ -7,6 +7,7 @@
  */
 #include "Track.h"
 
+#include <string.h>
 
 Track::Track(BRect frame, const char* name, uint32 resizingMode, uint32 flags)
 		:

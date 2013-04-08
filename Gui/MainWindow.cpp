@@ -11,8 +11,8 @@
 
 
 MainWindow::MainWindow(BRect frame)
-		:
-		BWindow(frame, "Faber Media Editor", B_TITLED_WINDOW, B_NOT_ZOOMABLE)
+	:
+	BWindow(frame, "Faber Media Editor", B_TITLED_WINDOW, B_NOT_ZOOMABLE)
 {
 	SetLayout(new BGroupLayout(B_VERTICAL));
 	fMainView = new MainView();

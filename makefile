@@ -14,7 +14,7 @@ SRCS = Faber.cpp ApplicationInit.cpp  $(SRCS_GUI) $(SRCS_COMMANDS) $(SRCS_COMPON
 
 RDEFS= 
 	
-LIBS= be translation tracker
+LIBS= be translation tracker stdc++
 
 LIBPATHS= 
 

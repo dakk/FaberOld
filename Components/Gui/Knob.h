@@ -35,6 +35,9 @@ protected:
 			uint32	fMinValue;
 			uint32	fMaxValue;
 			uint32	fValue;
+private:
+			uint32 resizingMode;
+			uint32 flags;
 };
 
 #endif
